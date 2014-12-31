@@ -1,0 +1,78 @@
+<head>
+  <title>My little library</title>
+</head>
+ 
+<body>
+  <h1>READ OR DIE!</h1>
+  <div id="regal">
+    {{> list}}
+    {{> details}}
+  </div>
+  <div id="inserter">
+    {{> controls }}
+  </div>
+  <div id="search-bar">
+    {{> szukajka }}
+  </div>
+</body>
+ 
+<template name="list">
+    <table class="books-table">
+      <div class="book-caption">
+        <tr class="book-field">
+          <td class="book-title" id="titleCaption">
+            Tytuł
+          </td>
+          <td class="book-author" id="authorCaption">
+            Autor
+          </td>
+        </tr>
+      </div>
+    </table>
+  <div id="books">
+    <table class="books-table">
+      {{#each items}}
+        <div>
+            <tr class="book-field">
+              <td class="book-title">
+                {{title}}
+              </td>
+              <td class="book-author">
+                {{author}}
+              </td>
+            </tr>
+        </div>
+      {{/each}}
+    </table>
+  </div>
+</template>
+ 
+<template name="controls">
+  <form>
+    <input type="text" id="newTitle" value="" placeholder="Tytuł" />
+    <input type="text" id="newAuthor" value="" placeholder="Autor" />
+    <input type="submit" id="add" value="Dodaj książkę" />
+  </form>
+</template>
+<template name="szukajka">
+  <form>
+    <input type="text" id="searchQuery" placeholder="Szukaj" />
+    <input type="submit" id="search" value="Szukaj" />
+  </form>
+</template>
+<template name="details">
+  <div id="book-details">
+    {{#with victim}}
+      <form>
+        <p>Autor: 
+          <input type="text" id="details_author" class="details_input" value="{{author}}" />
+        </p>
+        <p>Tytuł: 
+          <input type="text" id="details_title" class="details_input" value="{{title}}" />
+        </p>
+        <input type="submit" id="details_update" value="Zastosuj" style="visibility: hidden; float: left; position: absolute"/>
+      </form>
+      <button id="del">Usuń</button>
+    {{/with}}
+  </div>
+</template>
