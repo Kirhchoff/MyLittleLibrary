@@ -18,13 +18,16 @@
  
 <template name="list">
     <table class="books-table">
-      <div class="book-caption">
-        <tr class="book-field">
-          <td class="book-title" id="titleCaption">
+      <div>
+        <tr>
+          <td class="book-field book-caption" id="titleCaption">
             Tytuł
           </td>
-          <td class="book-author" id="authorCaption">
+          <td class="book-field book-caption" id="authorCaption">
             Autor
+          </td>
+          <td class="book-field book-caption" id="regalCaption">
+            Regał, półka
           </td>
         </tr>
       </div>
@@ -33,12 +36,15 @@
     <table class="books-table">
       {{#each items}}
         <div>
-            <tr class="book-field">
-              <td class="book-title">
+            <tr>
+              <td class="book-field">
                 {{title}}
               </td>
-              <td class="book-author">
+              <td class="book-field">
                 {{author}}
+              </td>
+              <td class="book-field">
+                {{regal}}, {{shelf}}
               </td>
             </tr>
         </div>
@@ -48,10 +54,23 @@
 </template>
  
 <template name="controls">
-  <form>
+  <form id="add-book">
     <input type="text" id="newTitle" value="" placeholder="Tytuł" />
     <input type="text" id="newAuthor" value="" placeholder="Autor" />
     <input type="submit" id="add" value="Dodaj książkę" />
+  </form>
+  <form id="add-regal">
+    <input type="text" id="newRegal" value="" placeholder="Regał" />
+    <input type="submit" id="addRegal" value="Dodaj regał" />
+  </form>
+  <form id="add-shelf">
+    <select>
+      {{#each regals}}
+      <option value="{{name}}" >{{name}}</option>
+      {{/each}}
+    </select>
+    <input type="text" id="newShelf" value="" placeholder="Półka" />
+    <input type="submit" id="addRegal" value="Dodaj półkę" />
   </form>
 </template>
 <template name="szukajka">
@@ -69,6 +88,20 @@
         </p>
         <p>Tytuł: 
           <input type="text" id="details_title" class="details_input" value="{{title}}" />
+        </p>
+        <p>Regał:
+          <select id="details_regal">
+            {{#each regals}}
+            <option value="{{name}}">{{name}}</option>
+            {{/each}}
+          </select>
+        </p>
+        <p>Półka: 
+          <select id="details_shelf">
+            {{#each shelves}}
+            <option value="{{name}}">{{name}}</option>
+            {{/each}}
+          </select>
         </p>
         <input type="submit" id="details_update" value="Zastosuj" style="visibility: hidden; float: left; position: absolute"/>
       </form>
